@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAX 100   // Maximum number of products allowed
+#define MAX 100   // Maximum number of products
 
 // Structure to store product details
 struct Product {
@@ -12,11 +12,11 @@ struct Product {
 
 int main() {
     struct Product inventory[MAX];  // Array of products
-    int count = 0;                  // Tracks number of products added
-    int choice;                     // Stores user's menu choice
+    int count = 0;                  // Number of products
+    int choice;                     // User menu choice
 
-    while (1) {  // Infinite loop until user chooses to exit
-        // Display Menu
+    while (1) {  // Infinite loop until exit
+        // Menu
         printf("\n=== Inventory Management System ===\n");
         printf("1. Add Product\n");
         printf("2. Display All Products\n");
@@ -28,9 +28,7 @@ int main() {
 
         switch (choice) {
 
-            // -----------------------------
             // CASE 1: Add new product
-            // -----------------------------
             case 1:
                 if (count < MAX) {
                     printf("Enter Product ID: ");
@@ -48,13 +46,11 @@ int main() {
                     count++;  // Increase product count
                     printf("Product added successfully!\n");
                 } else {
-                    printf("Inventory full! Cannot add more products.\n");
+                    printf("Inventory full!\n");
                 }
                 break;
 
-            // -----------------------------
-            // CASE 2: Display all products
-            // -----------------------------
+            // CASE 2: Display products
             case 2:
                 if (count == 0) {
                     printf("No products in inventory.\n");
@@ -69,19 +65,15 @@ int main() {
                 }
                 break;
 
-            // -----------------------------
             // CASE 3: Search product by ID
-            // -----------------------------
             case 3: {
                 int id, found = 0;
-
                 printf("Enter Product ID to search: ");
                 scanf("%d", &id);
 
-                // Search the array
                 for (int i = 0; i < count; i++) {
                     if (inventory[i].id == id) {
-                        printf("\nProduct Found!\n");
+                        printf("\nProduct Found:\n");
                         printf("ID: %d\n", inventory[i].id);
                         printf("Name: %s\n", inventory[i].name);
                         printf("Price: %.2f\n", inventory[i].price);
@@ -90,57 +82,42 @@ int main() {
                         break;
                     }
                 }
-
                 if (!found)
                     printf("Product not found!\n");
-
                 break;
             }
 
-            // -----------------------------
-            // CASE 4: Update stock of a product
-            // -----------------------------
+            // CASE 4: Update stock
             case 4: {
                 int id, newStock, found = 0;
-
                 printf("Enter Product ID to update stock: ");
                 scanf("%d", &id);
 
-                // Search for product
                 for (int i = 0; i < count; i++) {
                     if (inventory[i].id == id) {
                         printf("Enter new stock quantity: ");
                         scanf("%d", &newStock);
 
-                        inventory[i].stock = newStock;  // Update value
-                        printf("Stock updated successfully!\n");
+                        inventory[i].stock = newStock;
+                        printf("Stock updated!\n");
                         found = 1;
                         break;
                     }
                 }
-
                 if (!found)
                     printf("Product not found!\n");
-
                 break;
             }
 
-            // -----------------------------
-            // CASE 5: Exit program
-            // -----------------------------
+            // CASE 5: Exit
             case 5:
-                printf("Exiting program...\n");
+                printf("Exiting...\n");
                 return 0;
 
-            // -----------------------------
-            // INVALID CHOICE
-            // -----------------------------
             default:
-                printf("Invalid choice! Try again.\n");
+                printf("Invalid choice!\n");
         }
     }
 
     return 0;
 }
-
-                 
